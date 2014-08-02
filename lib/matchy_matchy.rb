@@ -16,25 +16,19 @@ module MatchyMatchy
 
   class MatchMaker
 
+    attr_reader :result
+
     def initialize(value)
       @to_match = value
-      @match_made = false
     end
 
     def value(value)
-      if value == @to_match
-        @match_made = true
-        @result = yield
-      end
+      @result = yield if value == @to_match
       self
     end
 
-    def result
-      @result
-    end
-
     def match_accomplished?
-      @match_made
+      !@result.nil?
     end
 
   end
