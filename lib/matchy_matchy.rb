@@ -22,12 +22,15 @@ module MatchyMatchy
     end
 
     def value(value)
-      @match_made = true if value == @to_match
+      if value == @to_match
+        @match_made = true
+        @result = yield
+      end
       self
     end
 
     def result
-      :result
+      @result
     end
 
     def match_accomplished?

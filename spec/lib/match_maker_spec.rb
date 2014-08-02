@@ -21,6 +21,12 @@ describe MatchyMatchy::MatchMaker do
 
             it { is_expected.to be(false) }
           end
+
+          describe '#result' do
+            subject { matcher_value.result }
+
+            it { is_expected.to eq(nil) }
+          end
         end
 
         context 'when the value is 42' do
