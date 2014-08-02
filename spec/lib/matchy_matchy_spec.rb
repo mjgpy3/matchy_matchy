@@ -4,16 +4,26 @@ describe MatchyMatchy do
 
   describe '.match' do
 
-    context 'when given a value but no block' do
-      subject { described_class.match(42) }
+    context 'when given a value of 42' do
 
-      specify { expect { subject }.to raise_error('Block must be given to satisfy match') }
-    end
+      context 'but no block' do
+        subject { described_class.match(42) }
 
-    context 'when given a value and a block that does not accept parameters' do
-      subject { described_class.match(42) { } }
+        specify { expect { subject }.to raise_error('Block must be given to satisfy match') }
+      end
 
-      specify { expect { subject }.to raise_error('Block must accept matcher as parameter') }
+      context 'and a block that does not accept parameters' do
+        subject { described_class.match(42) { } }
+
+        specify { expect { subject }.to raise_error('Block must accept matcher as parameter') }
+      end
+
+      context 'and a block that has the correct arity but does not satisfy the match' do
+        subject { described_class.match(42) { |on| } }
+
+        specify { expect { subject }.to raise_error('Non-exhaustive matches') }
+      end
+
     end
 
   end
