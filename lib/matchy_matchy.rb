@@ -27,6 +27,10 @@ module MatchyMatchy
       :result
     end
 
+    def match_accomplished?
+      true
+    end
+
   end
 
 end

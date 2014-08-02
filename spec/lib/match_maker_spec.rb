@@ -16,6 +16,12 @@ describe MatchyMatchy::MatchMaker do
         context 'when the value is 42' do
           let(:value) { 42 }
 
+          describe '#match_accomplished?' do
+            subject { matcher_value.match_accomplished? }
+
+            it { is_expected.to be(true) }
+          end
+
           describe '#result' do
             subject { matcher_value.result }
 
