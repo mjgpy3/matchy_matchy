@@ -1,1 +1,1 @@
-require 'lib/matchy_matchy'
+require './lib/matchy_matchy'
