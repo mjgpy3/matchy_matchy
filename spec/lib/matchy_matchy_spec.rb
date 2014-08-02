@@ -33,9 +33,6 @@ describe MatchyMatchy do
           specify { described_class.match(42) { |on| expect(on).to be_kind_of(described_class::MatchMaker) } }
         end
       end
-
     end
-
   end
-
 end

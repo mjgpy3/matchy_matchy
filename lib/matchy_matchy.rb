@@ -19,6 +19,14 @@ module MatchyMatchy
     def initialize(value)
     end
 
+    def value(value)
+      self
+    end
+
+    def result
+      :result
+    end
+
   end
 
 end
