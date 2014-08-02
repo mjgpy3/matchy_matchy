@@ -43,6 +43,22 @@ describe MatchyMatchy::MatchMaker do
 
             it { is_expected.to eq(:result) }
           end
+
+          context 'and another value is checked that is not 42' do
+            before(:each) { matcher.value(68) }
+
+            describe '#match_accomplished?' do
+              subject { matcher_value.match_accomplished? }
+
+              it { is_expected.to be(true) }
+            end
+
+            describe '#result' do
+              subject { matcher_value.result }
+
+              it { is_expected.to eq(:result) }
+            end
+          end
         end
       end
     end
