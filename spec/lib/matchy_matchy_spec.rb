@@ -28,8 +28,9 @@ describe MatchyMatchy do
         subject { described_class.match(42) { |on| 2014 } }
 
         it { is_expected.to eq(2014) }
-      end
 
+        specify { described_class.match(42) { |on| expect(on).to be_kind_of(described_class::MatchMaker) } }
+      end
 
     end
 
