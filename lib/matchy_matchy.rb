@@ -34,6 +34,13 @@ module MatchyMatchy
       @to_match = value
     end
 
+    def kind(kind)
+      if @to_match.is_a?(kind)
+        @result, @match_made = yield, true
+      end
+      self
+    end
+
     def value(value)
       if !@match_made && (value == @to_match || value.is_a?(AnythingMatcher))
         @result, @match_made = yield, true

@@ -45,6 +45,26 @@ describe MatchyMatchy::MatchMaker do
         end
       end
 
+      describe '#kind' do
+        let(:matcher_kind) { matcher.kind(kind) { :result } }
+
+        context 'when attempting to match against Fixnum' do
+          let(:kind) { Fixnum }
+
+          describe '#match_accomplished?' do
+            subject { matcher_kind.match_accomplished? }
+
+            it { is_expected.to be(true) }
+          end
+
+          describe '#result' do
+            subject { matcher_kind.result }
+
+            it { is_expected.to eq(:result) }
+          end
+        end
+      end
+
       describe '#value' do
         let(:matcher_value) { matcher.value(value) { :result } }
 
