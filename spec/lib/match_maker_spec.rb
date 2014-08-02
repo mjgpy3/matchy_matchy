@@ -50,6 +50,19 @@ describe MatchyMatchy::MatchMaker do
             it { is_expected.to eq(:the_first_result) }
           end
         end
+
+        context "when both match and the second is the anything matcher" do
+          let(:match_result) do
+            matcher.value(42) { :the_first_result }
+            matcher.value(anything) { :the_second_result }
+          end
+
+          describe '#result' do
+            subject { match_result.result }
+
+            it { is_expected.to eq(:the_first_result) }
+          end
+        end
       end
 
       describe '#value' do
