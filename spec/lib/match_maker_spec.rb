@@ -29,6 +29,22 @@ describe MatchyMatchy::MatchMaker do
           end
         end
 
+        context 'when the value is anything' do
+          let(:value) { MatchyMatchy::anything }
+
+          describe '#match_accomplished?' do
+            subject { matcher_value.match_accomplished? }
+
+            it { is_expected.to be(true) }
+          end
+
+          describe '#result' do
+            subject { matcher_value.result }
+
+            it { is_expected.to eq(:result) }
+          end
+        end
+
         context 'when the value is 42' do
           let(:value) { 42 }
 

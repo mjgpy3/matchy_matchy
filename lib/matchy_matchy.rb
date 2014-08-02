@@ -14,6 +14,12 @@ module MatchyMatchy
     result
   end
 
+  def self.anything
+    AnythingMatcher.new
+  end
+
+  class AnythingMatcher; end
+
   class MatchMaker
 
     attr_reader :result
@@ -23,7 +29,7 @@ module MatchyMatchy
     end
 
     def value(value)
-      @result = yield if value == @to_match
+      @result = yield if value == @to_match || value.is_a?(AnythingMatcher)
       self
     end
 
