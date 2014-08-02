@@ -25,17 +25,20 @@ module MatchyMatchy
     attr_reader :result
 
     def initialize(value)
+      @match_made = false
       @result = nil
       @to_match = value
     end
 
     def value(value)
-      @result = yield if value == @to_match || value.is_a?(AnythingMatcher)
+      if !@match_made && (value == @to_match || value.is_a?(AnythingMatcher))
+        @result, @match_made = yield, true
+      end
       self
     end
 
     def match_accomplished?
-      !@result.nil?
+      @match_made
     end
 
   end

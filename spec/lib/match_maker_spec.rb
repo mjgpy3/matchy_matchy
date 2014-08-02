@@ -37,6 +37,19 @@ describe MatchyMatchy::MatchMaker do
             it { is_expected.to be(false) }
           end
         end
+
+        context "when both match" do
+          let(:match_result) do
+            matcher.value(42) { :the_first_result }
+            matcher.value(42) { :the_second_result }
+          end
+
+          describe '#result' do
+            subject { match_result.result }
+
+            it { is_expected.to eq(:the_first_result) }
+          end
+        end
       end
 
       describe '#value' do
