@@ -7,7 +7,11 @@ module MatchyMatchy
     fail NO_BLOCK_GIVEN_ERROR unless block_given?
     fail REQUIRED_PARAM_ERROR unless b.arity == 1
 
-    fail NON_EXHAUSTIVE
+    result =  yield(nil)
+
+    fail NON_EXHAUSTIVE if result.nil?
+
+    result
   end
 
 end

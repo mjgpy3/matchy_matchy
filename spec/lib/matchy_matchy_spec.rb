@@ -24,6 +24,13 @@ describe MatchyMatchy do
         specify { expect { subject }.to raise_error('Non-exhaustive matches') }
       end
 
+      context 'and a block that has the correct arity and returns something non-nil' do
+        subject { described_class.match(42) { |on| 2014 } }
+
+        it { is_expected.to eq(2014) }
+      end
+
+
     end
 
   end
