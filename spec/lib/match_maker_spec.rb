@@ -13,7 +13,7 @@ describe MatchyMatchy::MatchMaker do
       describe '#value' do
         let(:matcher_value) { matcher.value(value) { :result } }
 
-        context 'when the value is not 42' do
+        context 'when attempting to match against 68' do
           let(:value) { 68 }
 
           describe '#match_accomplished?' do
@@ -29,7 +29,7 @@ describe MatchyMatchy::MatchMaker do
           end
         end
 
-        context 'when the value is anything' do
+        context 'when attempting to match against anything anything' do
           let(:value) { MatchyMatchy::anything }
 
           describe '#match_accomplished?' do
@@ -45,7 +45,7 @@ describe MatchyMatchy::MatchMaker do
           end
         end
 
-        context 'when the value is 42' do
+        context 'when attempting to match against 42' do
           let(:value) { 42 }
 
           describe '#match_accomplished?' do

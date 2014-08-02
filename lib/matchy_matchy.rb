@@ -25,6 +25,7 @@ module MatchyMatchy
     attr_reader :result
 
     def initialize(value)
+      @result = nil
       @to_match = value
     end
 
