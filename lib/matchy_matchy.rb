@@ -34,22 +34,28 @@ module MatchyMatchy
       @to_match = value
     end
 
-    def kind(kind)
-      if @to_match.is_a?(kind)
-        @result, @match_made = yield, true
-      end
+    def kind(kind, &b)
+      attempt_match(kind, @to_match.class, &b)
       self
     end
 
-    def value(value)
-      if !@match_made && (value == @to_match || value.is_a?(AnythingMatcher))
-        @result, @match_made = yield, true
-      end
+    def value(value, &b)
+      attempt_match(value, @to_match, &b)
       self
     end
 
     def match_accomplished?
       @match_made
+    end
+
+    private
+
+    def attempt_match(value, to_match)
+      @result, @match_made = yield, true if new_match?(value, to_match)
+    end
+
+    def new_match?(value, to_match)
+      !@match_made && (value == to_match || value.is_a?(AnythingMatcher))
     end
 
   end
