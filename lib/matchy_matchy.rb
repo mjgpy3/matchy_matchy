@@ -17,9 +17,12 @@ module MatchyMatchy
   class MatchMaker
 
     def initialize(value)
+      @to_match = value
+      @match_made = false
     end
 
     def value(value)
+      @match_made = true if value == @to_match
       self
     end
 
@@ -28,7 +31,7 @@ module MatchyMatchy
     end
 
     def match_accomplished?
-      true
+      @match_made
     end
 
   end
