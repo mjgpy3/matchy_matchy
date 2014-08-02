@@ -10,18 +10,24 @@ describe MatchyMatchy::MatchMaker do
 
       it { is_expected.to be_kind_of(described_class) }
 
-      context 'when doing some order-specific matches' do
+      context 'when doing some order-specific, value matches' do
 
-        context "when the second matches and the first doesn't" do
-          let(:match_result) do
-            matcher.value(43) { :the_first_result }
-            matcher.value(42) { :the_second_result }
-          end
+        [
+          [43, 42, 2],
+          [42, 42, 1],
+          [42, MatchyMatchy.anything, 1]
+        ].each do |first, second, winner|
+          context "for example: value #{first}, then #{second}" do
+            let(:match_result) do
+              matcher.value(first) { :the_first_result }
+              matcher.value(second) { :the_second_result }
+            end
 
-          describe '#result' do
-            subject { match_result.result }
+            describe '#result' do
+              subject { match_result.result }
 
-            it { is_expected.to eq(:the_second_result) }
+              it { is_expected.to eq(winner == 1 ? :the_first_result : :the_second_result) }
+            end
           end
         end
 
@@ -35,32 +41,6 @@ describe MatchyMatchy::MatchMaker do
             subject { match_result.match_accomplished? }
 
             it { is_expected.to be(false) }
-          end
-        end
-
-        context "when both match" do
-          let(:match_result) do
-            matcher.value(42) { :the_first_result }
-            matcher.value(42) { :the_second_result }
-          end
-
-          describe '#result' do
-            subject { match_result.result }
-
-            it { is_expected.to eq(:the_first_result) }
-          end
-        end
-
-        context "when both match and the second is the anything matcher" do
-          let(:match_result) do
-            matcher.value(42) { :the_first_result }
-            matcher.value(anything) { :the_second_result }
-          end
-
-          describe '#result' do
-            subject { match_result.result }
-
-            it { is_expected.to eq(:the_first_result) }
           end
         end
       end

@@ -18,7 +18,11 @@ module MatchyMatchy
     AnythingMatcher.new
   end
 
-  class AnythingMatcher; end
+  class AnythingMatcher
+    def to_s
+      '<MatchyMatchy::AnythingMatcher>'
+    end
+  end
 
   class MatchMaker
 
