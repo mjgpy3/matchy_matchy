@@ -10,6 +10,22 @@ describe MatchyMatchy::MatchMaker do
 
       it { is_expected.to be_kind_of(described_class) }
 
+      context 'when doing some order-specific matches' do
+
+        context "when the second matches and the first doesn't" do
+          let(:match_result) do
+            matcher.value(43) { :the_first_result }
+            matcher.value(42) { :the_second_result }
+          end
+
+          describe '#result' do
+            subject { match_result.result }
+
+            it { is_expected.to eq(:the_second_result) }
+          end
+        end
+      end
+
       describe '#value' do
         let(:matcher_value) { matcher.value(value) { :result } }
 
