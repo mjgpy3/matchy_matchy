@@ -24,6 +24,19 @@ describe MatchyMatchy::MatchMaker do
             it { is_expected.to eq(:the_second_result) }
           end
         end
+
+        context "when neither match" do
+          let(:match_result) do
+            matcher.value(43) { :the_first_result }
+            matcher.value(44) { :the_second_result }
+          end
+
+          describe '#match_accomplished?' do
+            subject { match_result.match_accomplished? }
+
+            it { is_expected.to be(false) }
+          end
+        end
       end
 
       describe '#value' do
