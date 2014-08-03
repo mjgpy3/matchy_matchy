@@ -15,16 +15,6 @@ module MatchyMatchy
     matcher.result
   end
 
-  def self.anything
-    AnythingMatcher.new
-  end
-
-  class AnythingMatcher
-    def to_s
-      '<MatchyMatchy::AnythingMatcher>'
-    end
-  end
-
   class MatchMaker
 
     attr_reader :result
@@ -45,18 +35,27 @@ module MatchyMatchy
       self
     end
 
+    def anything(&b)
+      make_match(&b)
+      self
+    end
+
     def match_accomplished?
       @match_made
     end
 
     private
 
-    def attempt_match(value, to_match)
-      @result, @match_made = yield, true if new_match?(value, to_match)
+    def attempt_match(value, to_match, &b)
+      make_match(&b) if new_match?(value, to_match)
+    end
+
+    def make_match
+      @result, @match_made = yield, true
     end
 
     def new_match?(value, to_match)
-      !@match_made && (value == to_match || value.is_a?(AnythingMatcher))
+      !@match_made && value == to_match
     end
 
   end

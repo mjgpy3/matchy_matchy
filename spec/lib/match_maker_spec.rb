@@ -15,7 +15,6 @@ describe MatchyMatchy::MatchMaker do
         [
           [43, 42, 2],
           [42, 42, 1],
-          [42, MatchyMatchy.anything, 1]
         ].each do |first, second, winner|
           context "for example: value #{first}, then #{second}" do
             let(:match_result) do
@@ -84,8 +83,8 @@ describe MatchyMatchy::MatchMaker do
           end
         end
 
-        context 'when attempting to match against anything anything' do
-          let(:value) { MatchyMatchy::anything }
+        context 'when attempting to match against anything' do
+          let(:matcher_value) { matcher.anything { :result } }
 
           describe '#match_accomplished?' do
             subject { matcher_value.match_accomplished? }
