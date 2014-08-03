@@ -11,6 +11,7 @@ Gem::Specification.new do |s|
   s.files = ['lib/matchy_matchy.rb',
              'spec/lib/matchy_matchy_spec.rb',
              'spec/lib/match_maker_spec.rb',
+             'spec/lib/integration_spec.rb',
              'README.md']
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'rubocop'

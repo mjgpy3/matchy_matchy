@@ -36,7 +36,7 @@ module MatchyMatchy
     end
 
     def anything(&b)
-      make_match(&b)
+      attempt_match(:a, :a, &b)
       self
     end
 
