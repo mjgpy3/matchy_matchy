@@ -7,11 +7,12 @@ module MatchyMatchy
     fail NO_BLOCK_GIVEN_ERROR unless block_given?
     fail REQUIRED_PARAM_ERROR unless b.arity == 1
 
-    result = yield(MatchMaker.new(value))
+    matcher = MatchMaker.new(value)
+    yield(matcher)
 
-    fail NON_EXHAUSTIVE if result.nil?
+    fail NON_EXHAUSTIVE unless matcher.match_accomplished?
 
-    result
+    matcher.result
   end
 
   def self.anything
